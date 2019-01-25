@@ -1,0 +1,19 @@
+{
+  "name": "chat-tutorial",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EconClass/chat-tutorial.git"
+  },
+  "author": "Zurich Okoren",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EconClass/chat-tutorial/issues"
+  },
+  "homepage": "https://github.com/EconClass/chat-tutorial#readme"
+}
