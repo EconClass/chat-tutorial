@@ -1,16 +1,20 @@
 // index.js
 $(document).ready(()=>{
     const socket = io.connect();
+
     let currentUser;
+
     socket.emit('get online users');
 
     $('#createUserBtn').click((e)=>{
         e.preventDefault();
-        let username = $('#usernameInput').val();
-        if(username.length > 0){
-            socket.emit('new user', username);
+        if($('#usernameInput').val().length > 0){
+            socket.emit('new user', $('#usernameInput').val());
+            // Save the current user when created
+            currentUser = $('#usernameInput').val();
             $('.usernameForm').remove();
-        };
+            $('.mainContainer').css('display', 'flex');
+        }
     });
 
     $('#sendChatBtn').click((e) => {
@@ -20,8 +24,8 @@ $(document).ready(()=>{
 
         if(message.length > 0){
             socket.emit('new message', {
-            sender : currentUser,
-            message : message,
+                sender : currentUser,
+                message : message,
             });
             $('#chatInput').val("");
         };
@@ -56,6 +60,16 @@ $(document).ready(()=>{
         $('.usersOnline').empty();
         for(username in onlineUsers){
             $('.usersOnline').append(`<p>${username}</p>`);
+        };
+    });
+
+    $('#newChannelBtn').click( () => {
+        let newChannel = $('#newChannelInput').val();
+      
+        if(newChannel.length > 0){
+            // Emit the new channel to the server
+            socket.emit('new channel', newChannel);
+            $('#newChannelInput').val("");
         };
     });
 });
