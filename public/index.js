@@ -6,6 +6,13 @@ $(document).ready(()=>{
 
     socket.emit('get online users');
 
+    socket.emit('user changed channel', "General");
+
+    $(document).on('click', '.channel', (e)=>{
+        let newChannel = e.target.textContent;
+        socket.emit('user changed channel', newChannel);
+    });
+
     $('#createUserBtn').click((e)=>{
         e.preventDefault();
         if($('#usernameInput').val().length > 0){
